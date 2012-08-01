@@ -45,25 +45,11 @@ unsigned int _controlfp(unsigned int new, unsigned int mask);
 #endif
 
 extern HINSTANCE global_hInstance;
-extern HWND cl_hwnd;
 
 extern qboolean ActiveApp, Minimized;
 
 extern int window_center_x, window_center_y;
 extern RECT window_rect;
-
-typedef void (*Key_Event_fp_t)(int key, qboolean down);
-extern void (*IN_Update_fp)(void);
-
-typedef struct in_state
-{
-	/* Pointers to functions back in client, set by vid_so */
-	void ( *IN_CenterView_fp )( void );
-	Key_Event_fp_t Key_Event_fp;
-	vec_t *viewangles;
-	int *in_strafe_state;
-	int *in_speed_state;
-} in_state_t;
 
 #endif
 
