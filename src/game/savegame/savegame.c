@@ -66,6 +66,7 @@
 
 #include "../../common/header/common.h" // YQ2ARCH
 #include "../header/local.h"
+#include "../oquake2_ogengine_integration.h"
 #include "savegame.h"
 
 /*
@@ -394,6 +395,7 @@ InitGame(void)
 
 	/* initialize entities and clients arrays */
 	InitAllocations();
+	OQuake2_STAR_Init();
 }
 
 /* ========================================================= */

@@ -25,6 +25,7 @@
  */
 
 #include "header/local.h"
+#include "oquake2_ogengine_integration.h"
 
 /*
  * Returns true if the inflictor can
@@ -145,6 +146,7 @@ Killed(edict_t *targ, edict_t *inflictor, edict_t *attacker,
 			{
 				targ->owner = attacker;
 			}
+			OQuake2_STAR_OnMonsterKilled(targ->classname);
 		}
 	}
 

@@ -25,6 +25,7 @@
  */
 
 #include "header/local.h"
+#include "oquake2_ogengine_integration.h"
 
 game_locals_t game;
 level_locals_t level;
@@ -100,6 +101,7 @@ ShutdownGame(void)
 {
 	gi.dprintf("==== ShutdownGame ====\n");
 
+	OQuake2_STAR_Cleanup();
 	gi.FreeTags(TAG_LEVEL);
 	gi.FreeTags(TAG_GAME);
 }
@@ -482,4 +484,5 @@ G_RunFrame(void)
 
 	/* build the playerstate_t structures for all players */
 	ClientEndServerFrames();
+	OQuake2_STAR_PollItems();
 }

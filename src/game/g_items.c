@@ -25,6 +25,7 @@
  */
 
 #include "header/local.h"
+#include "oquake2_ogengine_integration.h"
 
 #define HEALTH_IGNORE_MAX 1
 #define HEALTH_TIMED 2
@@ -1154,6 +1155,27 @@ Touch_Item(edict_t *ent, edict_t *other, const cplane_t *plane /* unused */,
 
 	if (taken)
 	{
+		/* OASIS OGEngine integration */
+		if (ent->classname)
+		{
+			const char *cn = ent->classname;
+			if (strstr(cn, "blue_key"))
+				OQuake2_STAR_OnKeyPickup(OQUAKE2_ITEM_BLUE_KEY);
+			else if (strstr(cn, "red_key"))
+				OQuake2_STAR_OnKeyPickup(OQUAKE2_ITEM_RED_KEY);
+			else
+			{
+				const char *itype = "Item";
+				if (strncmp(cn, "weapon_", 7) == 0) itype = "Weapon";
+				else if (strncmp(cn, "ammo_", 5) == 0) itype = "Ammo";
+				else if (strncmp(cn, "item_armor_", 11) == 0) itype = "Armor";
+				else if (strncmp(cn, "item_health", 11) == 0) itype = "Health";
+				OQuake2_STAR_OnItemPickup(
+					ent->item ? ent->item->pickup_name : cn,
+					itype, 1, NULL);
+			}
+		}
+
 		/* flash the screen */
 		other->client->bonus_alpha = 0.25;
 
